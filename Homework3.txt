@@ -1,0 +1,552 @@
+mysql> CREATE TABLE Supplier(
+    -> SupplierID int, 
+    -> Name char(50) NOT NULL,
+    -> PhoneNumber  char(25) NOT NULL,
+    -> Address varchar(50) NOT NULL,
+    -> PRIMARY KEY (SupplierID),
+    -> CHECK (SupplierID>= '1' AND SupplierID<='10')
+    -> );
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> CREATE TABLE Item(
+    -> ItemID int, 
+    -> Name char(50) NOT NULL,
+    -> PricePerLb  decimal(5,2) NOT NULL,
+    -> RoastingType char(1) ,
+    -> PRIMARY KEY (ItemID),
+    -> CHECK (ItemID>= '1' AND ItemID<='13')
+    -> );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> CREATE TABLE Employee(
+    -> EmployeeID int,
+    -> Name char(50) NOT NULL,
+    -> Occupation  char(25) NOT NULL,
+    -> PhoneNumber  char(25) NOT NULL,
+    -> Address varchar(50) NOT NULL,
+    -> PRIMARY KEY (EmployeeID),
+    -> CHECK (EmployeeID>= '1' AND EmployeeID<='10')
+    -> );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> CREATE TABLE Sales(
+    -> TransId  int,
+    -> ItemID int,
+    -> Discount int NOT NULL,
+    -> PurchaseDate  date NOT NULL,
+    -> EmployeeID int,
+    -> PRIMARY KEY (TransId), 
+    -> FOREIGN KEY (ItemID) 
+    -> REFERENCES Item(ItemID),
+    -> FOREIGN KEY (EmployeeID)
+    -> REFERENCES Employee(EmployeeID)
+    -> );
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> CREATE TABLE InventoryMGMT(
+    -> ItemID int,
+    -> SupplierID int,
+    -> TotalItemSales3Months int NOT NULL,
+    -> TotalAvailable int NOT NULL,
+    -> PRIMARY KEY (ItemID,SupplierID ), 
+    -> FOREIGN KEY (ItemID) 
+    -> REFERENCES Item(ItemID),
+    -> FOREIGN KEY (SupplierID) 
+    -> REFERENCES Supplier(SupplierID)
+    -> );
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> INSERT INTO Supplier VALUES ('1', 'KAFETOS COFFEE','14075698878', 'GUATEMALA');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO Supplier VALUES ('2', 'GOLDEN BEAN TRADE','5535988761894', 'BRAZIL');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Supplier VALUES ('3','PORT OF MOKHA','9671234567','YEMEN');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO Supplier VALUES ('4', 'KERCHANSHE TRADING PLC','251114000000','ETHIOPIA');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Supplier VALUES ('5', 'MERDEKA COFFEE','622188000000','INDONESIA');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Supplier VALUES ('6', 'PREMIUM COLOMBIAN COFFEE','5715087495','COLOMBIA');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO Supplier VALUES ('7', 'KYAGALANYI COFFEE LTD','256312000000','UGANDA');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Supplier VALUES ('8', 'MEFRAZ','96612345678','SAUDI ARABIA');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Supplier VALUES ('9', 'RELIANCE LTD','67512345678','PAPUA NEW GUINEA');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Supplier VALUES ('10', 'MY ROASTING COMPANY','14790000000','USA');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Item VALUES ('1','ANTIGUA','24.4','M');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO Item VALUES ('2','HAMBELA KIRITE','23','M');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Item VALUES ('3','KHAWLANI','40','L');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO Item VALUES ('4','MOGIANA','25','M');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO Item VALUES ('5','ALWADI','32','L');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO Item VALUES ('6','VOLCANICA SUPREMO','17.99','D');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Item VALUES ('7','PNG','21.95','M');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO Item VALUES ('8','SUMATRA GAYO','12.5','D');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Item VALUES ('9','ARABICA','19.99','D');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Item VALUES ('10','GENERAL MERCHANDISE','20','');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Item VALUES ('11','SIDAMO','23','M');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Item VALUES ('12','GHIMBI','20','M');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Item VALUES ('13','ALDURRAR','25','M');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Employee VALUES ('1', 'ALYSSA','OWNER','0479-123-4567','FAYETTEVILLE');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO Employee VALUES ('2', 'ISAIAH','MANAGER','0479-456-1237','FAYETTEVILLE');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Employee VALUES ('3','JACK','CHIEF ROASTER','0479-000-0000','FAYETTEVILLE');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO Employee VALUES ('4', 'EMILY','SALES','0479-111-1111','ROGERS');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO Employee VALUES ('5', 'VALERIA','COFFEE TASTER','0479-222-2222','ROGERS');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Employee VALUES ('6', 'TOM','BARISTA','0662-333-3333','TUPELO');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO Employee VALUES ('7', 'DANIELA','BARISTA','0214-000-0000','DALLAS');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO Employee VALUES ('8', 'STEPHANIE','BARISTA','479-555-5555','FAYETTEVILLE');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO Employee VALUES ('9', 'KIARA','MARKETING','0479-666-6666','ELKINS');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Employee VALUES ('10', 'JAMAL','SALES','0479-777-7777','FAYETTEVILLE');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Sales VALUES ('1001','2','0',STR_TO_DATE('01/01/2021', '%m/%d/%Y'),'10');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Sales VALUES ('1002','3','10',STR_TO_DATE('02/05/2021', '%m/%d/%Y'),'4');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO Sales VALUES ('1003','6','15',STR_TO_DATE('02/07/2021', '%m/%d/%Y'),'4');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> INSERT INTO Sales VALUES ('1004','7','0',STR_TO_DATE('02/12/2021', '%m/%d/%Y'),'10');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Sales VALUES ('1005','2','0',STR_TO_DATE('02/12/2021', '%m/%d/%Y'),'10');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Sales VALUES ('1006','1','10',STR_TO_DATE('02/12/2021', '%m/%d/%Y'),'10');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Sales VALUES ('1007','4','10',STR_TO_DATE('02/18/2021', '%m/%d/%Y'),'4');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Sales VALUES ('1008','8','20',STR_TO_DATE('02/20/2021', '%m/%d/%Y'),'4');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Sales VALUES ('1009','5','10',STR_TO_DATE('02/22/2021', '%m/%d/%Y'),'4');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO Sales VALUES ('1010','9','20',STR_TO_DATE('02/25/2021', '%m/%d/%Y'),'10');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Sales VALUES ('1011','10','10',STR_TO_DATE('02/28/2021', '%m/%d/%Y'),'4');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO Sales VALUES ('1012','1','10',STR_TO_DATE('02/28/2021', '%m/%d/%Y'),'10');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Sales VALUES ('1013','1','10',STR_TO_DATE('02/28/2021', '%m/%d/%Y'),'10');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO Sales VALUES ('1014','1','10',STR_TO_DATE('02/28/2021', '%m/%d/%Y'),'4');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO InventoryMGMT VALUES ('1','1','20','10');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO InventoryMGMT VALUES ('2','4','29','35');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO InventoryMGMT VALUES ('3','8','33','76');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO InventoryMGMT VALUES ('4','2','44','19');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO InventoryMGMT VALUES ('5','3','25','44');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO InventoryMGMT VALUES ('6','6','18','14');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO InventoryMGMT VALUES ('7','9','34','45');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO InventoryMGMT VALUES ('8','5','27','36');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO InventoryMGMT VALUES ('9','7','29','18');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO InventoryMGMT VALUES ('10','10','18','29');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO InventoryMGMT VALUES ('11','4','52','17');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO InventoryMGMT VALUES ('12','4','10','49');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO InventoryMGMT VALUES ('13','3','21','33');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SHOW TABLES;
++--------------------+
+| Tables_in_moyeneka |
++--------------------+
+| Employee           |
+| InventoryMGMT      |
+| Item               |
+| Sales              |
+| Supplier           |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql>          DESC Employee;          
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| EmployeeID  | int(11)     | NO   | PRI | NULL    |       |
+| Name        | char(50)    | NO   |     | NULL    |       |
+| Occupation  | char(25)    | NO   |     | NULL    |       |
+| PhoneNumber | char(25)    | NO   |     | NULL    |       |
+| Address     | varchar(50) | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> DESC Item;         
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| ItemID       | int(11)      | NO   | PRI | NULL    |       |
+| Name         | char(50)     | NO   |     | NULL    |       |
+| PricePerLb   | decimal(5,2) | NO   |     | NULL    |       |
+| RoastingType | char(1)      | YES  |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql>  DESC Sales;          
++--------------+---------+------+-----+---------+-------+
+| Field        | Type    | Null | Key | Default | Extra |
++--------------+---------+------+-----+---------+-------+
+| TransId      | int(11) | NO   | PRI | NULL    |       |
+| ItemID       | int(11) | YES  | MUL | NULL    |       |
+| Discount     | int(11) | NO   |     | NULL    |       |
+| PurchaseDate | date    | NO   |     | NULL    |       |
+| EmployeeID   | int(11) | YES  | MUL | NULL    |       |
++--------------+---------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> DESC Supplier;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| SupplierID  | int(11)     | NO   | PRI | NULL    |       |
+| Name        | char(50)    | NO   |     | NULL    |       |
+| PhoneNumber | char(25)    | NO   |     | NULL    |       |
+| Address     | varchar(50) | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql>          
+mysql> DESC InventoryMGMT;
++-----------------------+---------+------+-----+---------+-------+
+| Field                 | Type    | Null | Key | Default | Extra |
++-----------------------+---------+------+-----+---------+-------+
+| ItemID                | int(11) | NO   | PRI | NULL    |       |
+| SupplierID            | int(11) | NO   | PRI | NULL    |       |
+| TotalItemSales3Months | int(11) | NO   |     | NULL    |       |
+| TotalAvailable        | int(11) | NO   |     | NULL    |       |
++-----------------------+---------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql>          SHOW CREATE TABLE Sales; 
++-------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table | Create Table                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
++-------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Sales | CREATE TABLE `Sales` (
+  `TransId` int(11) NOT NULL,
+  `ItemID` int(11) DEFAULT NULL,
+  `Discount` int(11) NOT NULL,
+  `PurchaseDate` date NOT NULL,
+  `EmployeeID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`TransId`),
+  KEY `ItemID` (`ItemID`),
+  KEY `EmployeeID` (`EmployeeID`),
+  CONSTRAINT `Sales_ibfk_1` FOREIGN KEY (`ItemID`) REFERENCES `Item` (`ItemID`),
+  CONSTRAINT `Sales_ibfk_2` FOREIGN KEY (`EmployeeID`) REFERENCES `Employee` (`EmployeeID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 |
++-------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> SHOW CREATE TABLE Supplier; 
++----------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table    | Create Table                                                                                                                                                                                                                    |
++----------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Supplier | CREATE TABLE `Supplier` (
+  `SupplierID` int(11) NOT NULL,
+  `Name` char(50) NOT NULL,
+  `PhoneNumber` char(25) NOT NULL,
+  `Address` varchar(50) NOT NULL,
+  PRIMARY KEY (`SupplierID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 |
++----------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> SHOW CREATE TABLE Item; 
++-------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table | Create Table                                                                                                                                                                                                                |
++-------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Item  | CREATE TABLE `Item` (
+  `ItemID` int(11) NOT NULL,
+  `Name` char(50) NOT NULL,
+  `PricePerLb` decimal(5,2) NOT NULL,
+  `RoastingType` char(1) DEFAULT NULL,
+  PRIMARY KEY (`ItemID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 |
++-------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> SHOW CREATE TABLE Employee; 
++----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table    | Create Table                                                                                                                                                                                                                                                      |
++----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Employee | CREATE TABLE `Employee` (
+  `EmployeeID` int(11) NOT NULL,
+  `Name` char(50) NOT NULL,
+  `Occupation` char(25) NOT NULL,
+  `PhoneNumber` char(25) NOT NULL,
+  `Address` varchar(50) NOT NULL,
+  PRIMARY KEY (`EmployeeID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 |
++----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> SHOW CREATE TABLE InventoryMGMT;
++---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table         | Create Table                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
++---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| InventoryMGMT | CREATE TABLE `InventoryMGMT` (
+  `ItemID` int(11) NOT NULL,
+  `SupplierID` int(11) NOT NULL,
+  `TotalItemSales3Months` int(11) NOT NULL,
+  `TotalAvailable` int(11) NOT NULL,
+  PRIMARY KEY (`ItemID`,`SupplierID`),
+  KEY `SupplierID` (`SupplierID`),
+  CONSTRAINT `InventoryMGMT_ibfk_1` FOREIGN KEY (`ItemID`) REFERENCES `Item` (`ItemID`),
+  CONSTRAINT `InventoryMGMT_ibfk_2` FOREIGN KEY (`SupplierID`) REFERENCES `Supplier` (`SupplierID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 |
++---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT COLUMN_NAME, CONSTRAINT_NAME, REFERENCED_COLUMN_NAME, REFERENCED_TABLE_NAME FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE 
+    -> WHERE REFERENCED_COLUMN_NAME IS NOT NULL AND CONSTRAINT_SCHEMA = 'moyeneka';
++-------------+----------------------+------------------------+-----------------------+
+| COLUMN_NAME | CONSTRAINT_NAME      | REFERENCED_COLUMN_NAME | REFERENCED_TABLE_NAME |
++-------------+----------------------+------------------------+-----------------------+
+| ItemID      | InventoryMGMT_ibfk_1 | ItemID                 | Item                  |
+| SupplierID  | InventoryMGMT_ibfk_2 | SupplierID             | Supplier              |
+| ItemID      | Sales_ibfk_1         | ItemID                 | Item                  |
+| EmployeeID  | Sales_ibfk_2         | EmployeeID             | Employee              |
++-------------+----------------------+------------------------+-----------------------+
+4 rows in set (0.01 sec)
+
+mysql> SELECT * FROM Item; 
++--------+---------------------+------------+--------------+
+| ItemID | Name                | PricePerLb | RoastingType |
++--------+---------------------+------------+--------------+
+|      1 | ANTIGUA             |      24.40 | M            |
+|      2 | HAMBELA KIRITE      |      23.00 | M            |
+|      3 | KHAWLANI            |      40.00 | L            |
+|      4 | MOGIANA             |      25.00 | M            |
+|      5 | ALWADI              |      32.00 | L            |
+|      6 | VOLCANICA SUPREMO   |      17.99 | D            |
+|      7 | PNG                 |      21.95 | M            |
+|      8 | SUMATRA GAYO        |      12.50 | D            |
+|      9 | ARABICA             |      19.99 | D            |
+|     10 | GENERAL MERCHANDISE |      20.00 |              |
+|     11 | SIDAMO              |      23.00 | M            |
+|     12 | GHIMBI              |      20.00 | M            |
+|     13 | ALDURRAR            |      25.00 | M            |
++--------+---------------------+------------+--------------+
+13 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Sales; 
++---------+--------+----------+--------------+------------+
+| TransId | ItemID | Discount | PurchaseDate | EmployeeID |
++---------+--------+----------+--------------+------------+
+|    1001 |      2 |        0 | 2021-01-01   |         10 |
+|    1002 |      3 |       10 | 2021-02-05   |          4 |
+|    1003 |      6 |       15 | 2021-02-07   |          4 |
+|    1004 |      7 |        0 | 2021-02-12   |         10 |
+|    1005 |      2 |        0 | 2021-02-12   |         10 |
+|    1006 |      1 |       10 | 2021-02-12   |         10 |
+|    1007 |      4 |       10 | 2021-02-18   |          4 |
+|    1008 |      8 |       20 | 2021-02-20   |          4 |
+|    1009 |      5 |       10 | 2021-02-22   |          4 |
+|    1010 |      9 |       20 | 2021-02-25   |         10 |
+|    1011 |     10 |       10 | 2021-02-28   |          4 |
+|    1012 |      1 |       10 | 2021-02-28   |         10 |
+|    1013 |      1 |       10 | 2021-02-28   |         10 |
+|    1014 |      1 |       10 | 2021-02-28   |          4 |
++---------+--------+----------+--------------+------------+
+14 rows in set (0.00 sec)
+
+mysql> SELECT * FROM InventoryMGMT;
++--------+------------+-----------------------+----------------+
+| ItemID | SupplierID | TotalItemSales3Months | TotalAvailable |
++--------+------------+-----------------------+----------------+
+|      1 |          1 |                    20 |             10 |
+|      2 |          4 |                    29 |             35 |
+|      3 |          8 |                    33 |             76 |
+|      4 |          2 |                    44 |             19 |
+|      5 |          3 |                    25 |             44 |
+|      6 |          6 |                    18 |             14 |
+|      7 |          9 |                    34 |             45 |
+|      8 |          5 |                    27 |             36 |
+|      9 |          7 |                    29 |             18 |
+|     10 |         10 |                    18 |             29 |
+|     11 |          4 |                    52 |             17 |
+|     12 |          4 |                    10 |             49 |
+|     13 |          3 |                    21 |             33 |
++--------+------------+-----------------------+----------------+
+13 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Supplier; 
++------------+--------------------------+---------------+------------------+
+| SupplierID | Name                     | PhoneNumber   | Address          |
++------------+--------------------------+---------------+------------------+
+|          1 | KAFETOS COFFEE           | 14075698878   | GUATEMALA        |
+|          2 | GOLDEN BEAN TRADE        | 5535988761894 | BRAZIL           |
+|          3 | PORT OF MOKHA            | 9671234567    | YEMEN            |
+|          4 | KERCHANSHE TRADING PLC   | 251114000000  | ETHIOPIA         |
+|          5 | MERDEKA COFFEE           | 622188000000  | INDONESIA        |
+|          6 | PREMIUM COLOMBIAN COFFEE | 5715087495    | COLOMBIA         |
+|          7 | KYAGALANYI COFFEE LTD    | 256312000000  | UGANDA           |
+|          8 | MEFRAZ                   | 96612345678   | SAUDI ARABIA     |
+|          9 | RELIANCE LTD             | 67512345678   | PAPUA NEW GUINEA |
+|         10 | MY ROASTING COMPANY      | 14790000000   | USA              |
++------------+--------------------------+---------------+------------------+
+10 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Employee;
++------------+-----------+---------------+---------------+--------------+
+| EmployeeID | Name      | Occupation    | PhoneNumber   | Address      |
++------------+-----------+---------------+---------------+--------------+
+|          1 | ALYSSA    | OWNER         | 0479-123-4567 | FAYETTEVILLE |
+|          2 | ISAIAH    | MANAGER       | 0479-456-1237 | FAYETTEVILLE |
+|          3 | JACK      | CHIEF ROASTER | 0479-000-0000 | FAYETTEVILLE |
+|          4 | EMILY     | SALES         | 0479-111-1111 | ROGERS       |
+|          5 | VALERIA   | COFFEE TASTER | 0479-222-2222 | ROGERS       |
+|          6 | TOM       | BARISTA       | 0662-333-3333 | TUPELO       |
+|          7 | DANIELA   | BARISTA       | 0214-000-0000 | DALLAS       |
+|          8 | STEPHANIE | BARISTA       | 479-555-5555  | FAYETTEVILLE |
+|          9 | KIARA     | MARKETING     | 0479-666-6666 | ELKINS       |
+|         10 | JAMAL     | SALES         | 0479-777-7777 | FAYETTEVILLE |
++------------+-----------+---------------+---------------+--------------+
+10 rows in set (0.00 sec)
+
+mysql> 
+mysql> SELECT n.TotalItemSales3Months AS TotalSold, s.Name AS SupplierName, I.Name AS CoffeeName, I.RoastingType, s.Address
+    -> FROM Supplier s, Item I, InventoryMGMT n
+    -> WHERE n.ItemID = I.ItemID AND n.SupplierID=s.SupplierID AND n.TotalItemSales3Months IN (SELECT MAX(TotalItemSales3Months) FROM InventoryMGMT);
++-----------+------------------------+------------+--------------+----------+
+| TotalSold | SupplierName           | CoffeeName | RoastingType | Address  |
++-----------+------------------------+------------+--------------+----------+
+|        52 | KERCHANSHE TRADING PLC | SIDAMO     | M            | ETHIOPIA |
++-----------+------------------------+------------+--------------+----------+
+1 row in set (0.01 sec)
+
+mysql> SELECT format(sum(I.PricePerLb - (I.PricePerLb * s.Discount*0.01)), 2) AS ValueOfSales
+    -> FROM Sales s, Item I
+    -> WHERE I.ItemID = s.ItemID AND s.PurchaseDate  = '2021-02-12';
++--------------+
+| ValueOfSales |
++--------------+
+| 66.91        |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> 
+mysql> SELECT I.RoastingType, COUNT(*) AS count 
+    -> FROM Item I, InventoryMGMT n, Sales s
+    -> WHERE n.ItemID = I.ItemID AND I.ItemID = s.ItemID
+    -> GROUP BY I.RoastingType 
+    -> ORDER BY count DESC
+    -> LIMIT 1;
++--------------+-------+
+| RoastingType | count |
++--------------+-------+
+| M            |     8 |
++--------------+-------+
+1 row in set (0.00 sec)
+
+mysql> create temporary table RemainingStock as 
+    -> (
+    -> Select n.ItemID, n.SupplierID, i.Name, (TotalAvailable /( TotalAvailable + TotalItemSales3Months)*100) as PercentRemaining
+    -> from Item i, InventoryMGMT n
+    -> where n.ItemID = i.ItemID
+    -> );
+Query OK, 13 rows affected, 11 warnings (0.00 sec)
+Records: 13  Duplicates: 0  Warnings: 11
+
+mysql> Select r.Name, s.Name, s.PhoneNumber
+    -> From RemainingStock r, Supplier s
+    -> Where s.SupplierID = r. SupplierID and PercentRemaining < 40;
++---------+------------------------+---------------+
+| Name    | Name                   | PhoneNumber   |
++---------+------------------------+---------------+
+| ANTIGUA | KAFETOS COFFEE         | 14075698878   |
+| MOGIANA | GOLDEN BEAN TRADE      | 5535988761894 |
+| ARABICA | KYAGALANYI COFFEE LTD  | 256312000000  |
+| SIDAMO  | KERCHANSHE TRADING PLC | 251114000000  |
++---------+------------------------+---------------+
+4 rows in set (0.00 sec)
+
+mysql> notee
