@@ -1,8 +1,7 @@
 # MySQL-with-python
 
 Objective
-The goal of this assignment is to understand and practice using a high-level language (C++, Java, or Python) to interact with a database via ODBC or JDBC. Your goal is to write a program that runs from the command line. It interacts with an end-user to insert, delete, and update records as well as handle queries on the data. The interface can be very similar to Homework 1, and the database managed is the same as homework 3.
-
+The goal of this assignment is to understand and practice using a high-level language (C++, Java, or Python) to interact with a database via ODBC or JDBC. Your goal is to write a program that runs from the command line. It interacts with an end-user to insert, delete, and update records as well as handle queries on the data. 
 1) Find all suppliers and coffees names for a given country
 2) Add a new supplier with item(s) that they provide, then show who else provides such item(s)
 3) List all items sold by a particular employee
